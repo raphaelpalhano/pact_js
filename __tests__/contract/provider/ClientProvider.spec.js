@@ -18,10 +18,10 @@ describe("Clients Service Verification", () => {
             provider: "Clients Service",
             logLevel: "DEBUG",
             providerBaseUrl: URL,
-            pactUrls: [path.resolve(process.cwd(), "./__tests__/contract/pacts/frontend-clientsservice.json")],
+            pactUrls: ['http://localhost:8080/pacts/provider/ClientService/consumer/Frontend/latest'],
             consumerVersionTags: ["dev"],
             providerVersionTags: ["dev"],
-            publishVerificationResult: false,
+            publishVerificationResult: true,
             providerVersion: "1.0.0",
 
         }
