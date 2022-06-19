@@ -5,6 +5,7 @@ const {server, importData} = require("../../../src/provider")
 
 const URL = "http://localhost:8081"
 
+jest.setTimeout(30000)
 
 server.listen(8081, () => {
     importData()
@@ -13,16 +14,16 @@ server.listen(8081, () => {
 })
 
 describe("Clients Service Verification", () => {
-    it("validates the expectations of Client Service", async () => {
+    it("validates the expectations of Client Service", () => {
         let options = {
-            provider: "Clients Service",
+            provider: "ClientsService",
             logLevel: "DEBUG",
             providerBaseUrl: URL,
-            pactUrls: ['http://localhost:8080/pacts/provider/ClientService/consumer/Frontend/latest'],
+            pactUrls: [path.resolve(process.cwd(), "./__tests__/contract/pacts/frontend-clientsservice.json")],
             consumerVersionTags: ["dev"],
             providerVersionTags: ["dev"],
-            publishVerificationResult: true,
-            providerVersion: "1.0.0",
+            publishVerificationResult: false,
+            providerVersion: "1.0.1",
 
         }
 
