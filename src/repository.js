@@ -14,6 +14,12 @@ class Repository {
     add(entity) {
       this.entities.push(entity)
     }
+
+    remove(id){
+      this.entities.filter((values) => {
+        return values != id;
+      })
+    }
   
     clear() {
       this.entities = []

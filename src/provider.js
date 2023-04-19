@@ -64,6 +64,27 @@ server.post("/clients", (req, res) => {
   res.json(client)
 })
 
+server.delete("/clients/:id", (req, res) => {
+  const client = req.params.id
+
+  // Basic validation for missing first name field
+  if (!client) {
+    res.status(400)
+    res.send({message:'Missing id!', body: req.body})
+    res.end()
+  }else{
+    res.status(404)
+    res.send({message: 'Client not found!'})
+    res.end()
+  }
+
+  client.id = clientRepository.fetchAll().length -1
+  clientRepository.remove(client)
+
+  res.json(client)
+
+})
+
 module.exports = {
   server,
   importData,

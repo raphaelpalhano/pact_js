@@ -1,7 +1,6 @@
-"use strict"
-
 const { Matchers } = require("@pact-foundation/pact")
 const { getClients, postClient } = require("../../../src/consumer")
+
 
 jest.setTimeout(30000)
 
@@ -23,7 +22,10 @@ describe("Clients Service", () => {
         "lastName": "Simpson",
         "age": 39,
         "id": 3
-    }]
+    },
+
+
+   ]
 
     afterEach(() => provider.verify())
 
@@ -51,7 +53,8 @@ describe("Clients Service", () => {
         })
 
         test("returns correct body, header and statusCode", async() => {
-            const response = await getClients()
+            const response = await getClients().then((res) => res)
+            console.log(response)
             expect(response.headers['content-type']).toBe("application/json; charset=utf-8")
             expect(response.data).toEqual(GET_EXPECTED_BODY)
             expect(response.status).toEqual(200)
